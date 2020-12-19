@@ -1,0 +1,21 @@
+﻿  mat.cpp
+C:\Users\bill_\source\repos\MatrixNew3\MatrixNew3\mat.cpp(59,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\bill_\source\repos\MatrixNew3\MatrixNew3\mat.cpp(60,23): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+C:\Users\bill_\source\repos\MatrixNew3\MatrixNew3\mat.cpp(76,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\bill_\source\repos\MatrixNew3\MatrixNew3\mat.cpp(77,23): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+C:\Users\bill_\source\repos\MatrixNew3\MatrixNew3\mat.cpp(77,35): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+  Source.cpp
+  Generating Code...
+  MatrixNew3.vcxproj -> C:\Users\bill_\source\repos\MatrixNew3\Debug\MatrixNew3.exe

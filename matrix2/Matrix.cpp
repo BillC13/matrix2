@@ -55,8 +55,6 @@ void Matrix::calcRes()
         cres.push_back(0);
     }
 
-    double mtim = 1;
-
     for (int i = 0; i < mtrp.size(); i++) {
         cres[mtrp[i][0]] += mtrp[i][2] * mtim;
     }
@@ -82,7 +80,7 @@ void Matrix::matRes()
     // create multiplication vector
     std::vector<double> mult;
     for (int i = 0; i < k; i++) {
-        mult.push_back(1);
+        mult.push_back(mtim);
     }
 
     for (int i = 0; i < k; i++)
@@ -98,7 +96,7 @@ void Matrix::matRes()
 void Matrix::checkRes()
     // Are the results the same?
 {
-    err = 0;
+    int err = 0;
     for (int i = 0; i < k; i++)
     {
         if (mres[i] != cres[i]) {
@@ -108,7 +106,10 @@ void Matrix::checkRes()
     }
     if (err == 0) {
         std::cout << "The calculation was correct" << std::endl;
-    }
+        std::cout << "The result is" << std::endl;
+        for (int i = 0; i < k; i++)
+            std::cout << mres[i] << std::endl;
+        }
     else {
         std::cout << "Someone fucked up somewhere" << std::endl;
     }

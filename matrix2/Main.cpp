@@ -15,6 +15,9 @@ int main()
 
     matrix.readFile(filename);
 
+    std::cout << "Enter the matrix multiplier" << std::endl;
+    std::cin >> matrix.mtim;
+
     matrix.calcRes();
 
     matrix.matRes();

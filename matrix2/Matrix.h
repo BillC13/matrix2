@@ -10,13 +10,14 @@ private:
 	std::vector<std::vector<double>> mtrp;
 	std::vector<double> mres;
 	std::vector<double> cres;
-	int k, err;
+	int k;
 
 public:
 	void readFile(std::string);
 	void calcRes();
 	void matRes();
 	void checkRes();
+	double mtim;
 	};
 
 #endif /* Matrix_h */

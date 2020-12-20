@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <string>
 #include <vector>
-#include "mat.h"
+#include "Matrix.h"
 
 int main()
 {
@@ -11,15 +11,15 @@ int main()
     std::cout << "Enter the matrix filename" << std::endl;
     getline(std::cin, filename);
 
-    mat mat;
+    Matrix matrix;
 
-    mat.readFile(filename);
+    matrix.readFile(filename);
 
-    mat.calcRes();
+    matrix.calcRes();
 
-    mat.matRes();
+    matrix.matRes();
 
-    mat.checkRes();
+    matrix.checkRes();
 
     return 0;
 }

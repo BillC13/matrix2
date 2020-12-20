@@ -1,10 +1,10 @@
-#ifndef mat_h
-#define mat_h
+#ifndef Matrix_h
+#define Matrix_h
 
 #include <vector>
 #include <string>
 
-class mat {
+class Matrix {
 private:
 	std::string mtyp;
 	std::vector<std::vector<double>> mtrp;
@@ -19,4 +19,4 @@ public:
 	void checkRes();
 	};
 
-#endif /* mat_h */
+#endif /* Matrix_h */

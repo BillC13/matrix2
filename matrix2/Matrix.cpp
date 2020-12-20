@@ -1,10 +1,10 @@
-#include "mat.h"
+#include "Matrix.h"
 
 #include <iostream>
 #include <fstream>
 #include <vector>
 
-void mat::readFile(std::string filename)
+void Matrix::readFile(std::string filename)
 {
     // Check to see if input file exists
     std::ifstream myfile(filename);
@@ -48,7 +48,7 @@ void mat::readFile(std::string filename)
 
 }
 
-void mat::calcRes()
+void Matrix::calcRes()
 // This is the calculation using the triplet vectors
 {
     for (int i = 0; i < k; i++) {
@@ -63,7 +63,7 @@ void mat::calcRes()
 
 }
 
-void mat::matRes()
+void Matrix::matRes()
 {
     // This is the calculation using a full matrix to check
     std::vector<std::vector<double>> mate;
@@ -95,7 +95,7 @@ void mat::matRes()
     }
 }
 
-void mat::checkRes()
+void Matrix::checkRes()
     // Are the results the same?
 {
     err = 0;

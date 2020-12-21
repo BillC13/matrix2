@@ -9,26 +9,14 @@ private:
 	std::vector<std::vector<double>> mtrp;
 	std::vector<double> mres;
 	std::vector<double> cres;
+	std::string mtyp;
 	int k;
 
 public:
 	void calcRes(double);
 	void matRes(double);
+	void readFile(std::string);
 	void checkRes();
 	void printRes();
-};
-
-class Full {
-private:
-
-public:
-	void readFull(std::string);
-};
-
-class Sparse {
-private:
-
-public:
-	void readSparse(std::string);
 };
 #endif /* Matrix_h */

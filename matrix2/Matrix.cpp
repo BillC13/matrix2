@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-/*
+
 void Matrix::readFile(std::string filename)
 {
     // Check to see if input file exists
@@ -48,100 +48,6 @@ void Matrix::readFile(std::string filename)
         exit(1);
     }
     myfile.close();    //close the file object.     
-}
-*/
-void Full::readFull(std::string filename)
-{
-    // Check to see if input file exists
-    std::ifstream myfile(filename);
-    if (!myfile.is_open()) {
-        std::cout << "Couldn't open " << filename << std::endl;
-        exit(1);
-    }
-    //   Open the input file
-    (getline(myfile, mtyp)); //Get the matrix type
-    myfile >> k; //Get the matrix dimensions
-
-    // Create the triplet vectors
-    if (mtyp == "Full matrix") {
-        double z;
-        for (int i = 0; i < k; i++) {
-            for (int j = 0; j < k; j++) {
-                myfile >> z;
-                if (z != 0) {
-                    std::vector<double> temp;
-                    temp.push_back(i);
-                    temp.push_back(j);
-                    temp.push_back(z);
-                    mtrp.push_back(temp);
-                }
-            }
-        }
-    }
-    else if (mtyp == "Sparse matrix") {
-        double z;  // Value in sparse matrix
-        int i, j; // Locations in sparse matrix
-        while (myfile >> i >> j >> z) {
-            std::vector<double> temp;
-            temp.push_back(i - 1);
-            temp.push_back(j - 1);
-            temp.push_back(z);
-            mtrp.push_back(temp);
-        }
-    }
-    else {
-        std::cout << "Invalid matrix specifier" << std::endl;
-        exit(1);
-    }
-    myfile.close();    //close the file object.     
-
-}
-
-void Sparse::readSparse(std::string filename)
-{
-    // Check to see if input file exists
-    std::ifstream myfile(filename);
-    if (!myfile.is_open()) {
-        std::cout << "Couldn't open " << filename << std::endl;
-        exit(1);
-    }
-    //   Open the input file
-    (getline(myfile, mtyp)); //Get the matrix type
-    myfile >> k; //Get the matrix dimensions
-
-    // Create the triplet vectors
-    if (mtyp == "Full matrix") {
-        double z;
-        for (int i = 0; i < k; i++) {
-            for (int j = 0; j < k; j++) {
-                myfile >> z;
-                if (z != 0) {
-                    std::vector<double> temp;
-                    temp.push_back(i);
-                    temp.push_back(j);
-                    temp.push_back(z);
-                    mtrp.push_back(temp);
-                }
-            }
-        }
-    }
-    else if (mtyp == "Sparse matrix") {
-        double z;  // Value in sparse matrix
-        int i, j; // Locations in sparse matrix
-        while (myfile >> i >> j >> z) {
-            std::vector<double> temp;
-            temp.push_back(i - 1);
-            temp.push_back(j - 1);
-            temp.push_back(z);
-            mtrp.push_back(temp);
-        }
-    }
-    else {
-        std::cout << "Invalid matrix specifier" << std::endl;
-        exit(1);
-    }
-    myfile.close();    //close the file object.     
-
 }
 
 void Matrix::calcRes(double mtim)

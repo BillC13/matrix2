@@ -51,9 +51,10 @@ void Matrix::readFile(std::string filename)
 
 }
 
-void Matrix::calcRes(double mtim)
+std::vector<double> Matrix::calcRes(double mtim)
 // This is the calculation using the triplet vectors
 {
+    
     for (int i = 0; i < k; i++) {
         cres.push_back(0);
     }
@@ -61,9 +62,10 @@ void Matrix::calcRes(double mtim)
     for (int i = 0; i < mtrp.size(); i++) {
         cres[mtrp[i][0]] += mtrp[i][2] * mtim;
     }
+    return cres;
 }
 
-void Matrix::matRes(double mtim)
+std::vector<double> Matrix::matRes(double mtim)
 {
     // This is the calculation using a full matrix to check
     std::vector<std::vector<double>> mate;
@@ -85,6 +87,7 @@ void Matrix::matRes(double mtim)
         mult.push_back(mtim);
     }
 
+    
     for (int i = 0; i < k; i++)
     {
         mres.push_back(0);                        // Initialise
@@ -93,9 +96,10 @@ void Matrix::matRes(double mtim)
             mres[i] += mate[i][j] * mult[j];       // Sum of each element
         }
     }
+    return mres;
 }
 
-void Matrix::checkRes()
+void Matrix::checkRes(std::vector<double> mres, std::vector<double> cres)
     // Are the results the same?
 {
     int err = 0;
@@ -108,13 +112,13 @@ void Matrix::checkRes()
     }
     if (err == 0) {
         std::cout << "The calculation was correct!" << std::endl;
-        printRes();
+        printRes(mres);
     } else {
         std::cout << "There was an error!" << std::endl;
     }
 }
 
-void Matrix::printRes()
+void Matrix::printRes(std::vector<double> mres)
 {
     // Print the result?
     std::cout << "The result is" << std::endl;

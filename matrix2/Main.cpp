@@ -19,11 +19,13 @@ int main()
     double mtim;
     std::cin >> mtim;
 
+    std::vector<double> cres;
     matrix.calcRes(mtim);
 
+    std::vector<double> mres;
     matrix.matRes(mtim);
 
-    matrix.checkRes();
+    matrix.checkRes(mres, cres);
 
     return 0;
 }

@@ -16,11 +16,11 @@ int main()
     switch (matrix.readFile(filename)) {
     case(1):
         std::cout << "Couldn't open " << filename << std::endl;
-        break;
+        return 1;
     case(2):
         std::cout << "Invalid matrix specifier " << std::endl;
-        break;
-    case(0):
+        return 1;
+    }
         std::cout << "Enter the matrix multiplier" << std::endl;
         double mtim;
         std::cin >> mtim;
@@ -35,8 +35,6 @@ int main()
         }
         else {
             std::cout << "There was an error!" << std::endl;
-        }
-
-        return 0;
+          return 0;
     }
 }

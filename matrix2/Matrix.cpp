@@ -101,15 +101,13 @@ void Matrix::matRes(double mtim)
 int Matrix::checkRes()
     // Are the results the same?
 {
-    int err = 0;
     for (int i = 0; i < k; i++)
     {
         if (mres[i] != cres[i]) {
-            err = 1;
-            break;
+            return 1;
         }
     }
-    return err;
+    return 0;
 }
 
 void Matrix::printRes()

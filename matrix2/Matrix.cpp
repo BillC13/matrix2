@@ -9,17 +9,16 @@ void Matrix::readFile(std::string filename)
     // Check to see if input file exists
     std::ifstream myfile(filename);
     if (!myfile.is_open()) {
-        std::cout << "Couldn't open Matrix.txt" << std::endl;
+        std::cout << "Couldn't open "<< filename << std::endl;
         exit(1);
     }
     //   Open the input file
     (getline(myfile, mtyp)); //Get the matrix type
     myfile >> k; //Get the matrix dimensions
-    double z;
-    for (int i = 0; i < k; i++);
 
     // Create the triplet vectors
     if (mtyp == "Full matrix") {
+        double z;
         for (int i = 0; i < k; i++) {
             for (int j = 0; j < k; j++) {
                 myfile >> z;
@@ -44,11 +43,15 @@ void Matrix::readFile(std::string filename)
             mtrp.push_back(temp);
         }
     }
+    else {
+        std::cout << "Invalid matrix specifier" << std::endl;
+        exit(1);
+    }
     myfile.close();    //close the file object.     
 
 }
 
-void Matrix::calcRes()
+void Matrix::calcRes(double mtim)
 // This is the calculation using the triplet vectors
 {
     for (int i = 0; i < k; i++) {
@@ -58,10 +61,9 @@ void Matrix::calcRes()
     for (int i = 0; i < mtrp.size(); i++) {
         cres[mtrp[i][0]] += mtrp[i][2] * mtim;
     }
-
 }
 
-void Matrix::matRes()
+void Matrix::matRes(double mtim)
 {
     // This is the calculation using a full matrix to check
     std::vector<std::vector<double>> mate;
@@ -105,12 +107,18 @@ void Matrix::checkRes()
         }
     }
     if (err == 0) {
-        std::cout << "The calculation was correct" << std::endl;
-        std::cout << "The result is" << std::endl;
-        for (int i = 0; i < k; i++)
-            std::cout << mres[i] << std::endl;
-        }
-    else {
-        std::cout << "Someone fucked up somewhere" << std::endl;
+        std::cout << "The calculation was correct!" << std::endl;
+        printRes();
+    } else {
+        std::cout << "There was an error!" << std::endl;
+    }
+}
+
+void Matrix::printRes()
+{
+    // Print the result?
+    std::cout << "The result is" << std::endl;
+    for (int i = 0; i < k; i++) {
+        std::cout << mres[i] << std::endl;
     }
 }

@@ -14,10 +14,10 @@ private:
 
 public:
 	void readFile(std::string);
-	void calcRes();
-	void matRes();
+	void calcRes(double);
+	void matRes(double);
 	void checkRes();
-	double mtim;
+	void printRes();
 	};
 
 #endif /* Matrix_h */

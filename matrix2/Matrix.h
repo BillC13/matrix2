@@ -13,7 +13,7 @@ private:
 	int k;
 
 public:
-	int readFile(std::string, int err);
+	int readFile(std::string);
 	void calcRes(double mtim);
 	void matRes(double mtim);
 	void checkRes(int err);

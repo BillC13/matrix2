@@ -4,52 +4,54 @@
 #include <fstream>
 #include <vector>
 
-int Matrix::readFile(std::string filename, int err)
+int Matrix::readFile(std::string filename)
 {
-    err = 0;
+    int err = 0;
     // Check to see if input file exists
     std::ifstream myfile(filename);
     if (!myfile.is_open()) {
-        err = 1;
-    } else
+        return 1;
+    }
+    else
     {
-    //   Open the input file
-    (getline(myfile, mtyp)); //Get the matrix type
-    myfile >> k; //Get the matrix dimensions
+        //   Open the input file
+        (getline(myfile, mtyp)); //Get the matrix type
+        myfile >> k; //Get the matrix dimensions
 
-    // Create the triplet vectors
-    if (mtyp == "Full matrix") {
-        double z;
-        for (int i = 0; i < k; i++) {
-            for (int j = 0; j < k; j++) {
-                myfile >> z;
-                if (z != 0) {
-                    std::vector<double> temp;
-                    temp.push_back(i);
-                    temp.push_back(j);
-                    temp.push_back(z);
-                    mtrp.push_back(temp);
+        // Create the triplet vectors
+        if (mtyp == "Full matrix") {
+            double z;
+            for (int i = 0; i < k; i++) {
+                for (int j = 0; j < k; j++) {
+                    myfile >> z;
+                    if (z != 0) {
+                        std::vector<double> temp;
+                        temp.push_back(i);
+                        temp.push_back(j);
+                        temp.push_back(z);
+                        mtrp.push_back(temp);
+                    }
                 }
             }
+            return 0;
         }
-    }
-    else if (mtyp == "Sparse matrix") {
-        double z;  // Value in sparse matrix
-        int i, j; // Locations in sparse matrix
-        while (myfile >> i >> j >> z) {
-            std::vector<double> temp;
-            temp.push_back(i - 1);
-            temp.push_back(j - 1);
-            temp.push_back(z);
-            mtrp.push_back(temp);
+        else if (mtyp == "Sparse matrix") {
+            double z;  // Value in sparse matrix
+            int i, j; // Locations in sparse matrix
+            while (myfile >> i >> j >> z) {
+                std::vector<double> temp;
+                temp.push_back(i - 1);
+                temp.push_back(j - 1);
+                temp.push_back(z);
+                mtrp.push_back(temp);
+            }
+            return 0;
         }
+        else {
+            return 2;
+        }
+        myfile.close();    //close the file object. 
     }
-    else {
-        err =  2;
-    }
-    myfile.close();    //close the file object.  
-    }
-    return err;
 }
 
 void Matrix::calcRes(double mtim)

@@ -14,14 +14,12 @@ int main()
     Matrix matrix;
     int err = 0;
 
-    matrix.readFile(filename, err);
-    if (err == 1) {
+    switch (matrix.readFile(filename)) {
+    case(1):
         std::cout << "Couldn't open " << filename << std::endl;
-    }
-    else if (err == 2) {
+    case(2):
         std::cout << "Invalid matrix specifier " << std::endl;
-    }
-    else {
+    case(0):
         std::cout << "Enter the matrix multiplier" << std::endl;
         double mtim;
         std::cin >> mtim;

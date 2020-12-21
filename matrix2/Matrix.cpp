@@ -3,13 +3,13 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-
+/*
 void Matrix::readFile(std::string filename)
 {
     // Check to see if input file exists
     std::ifstream myfile(filename);
     if (!myfile.is_open()) {
-        std::cout << "Couldn't open "<< filename << std::endl;
+        std::cout << "Couldn't open " << filename << std::endl;
         exit(1);
     }
     //   Open the input file
@@ -37,8 +37,54 @@ void Matrix::readFile(std::string filename)
         int i, j; // Locations in sparse matrix
         while (myfile >> i >> j >> z) {
             std::vector<double> temp;
-            temp.push_back(i-1);
-            temp.push_back(j-1);
+            temp.push_back(i - 1);
+            temp.push_back(j - 1);
+            temp.push_back(z);
+            mtrp.push_back(temp);
+        }
+    }
+    else {
+        std::cout << "Invalid matrix specifier" << std::endl;
+        exit(1);
+    }
+    myfile.close();    //close the file object.     
+}
+*/
+void Full::readFull(std::string filename)
+{
+    // Check to see if input file exists
+    std::ifstream myfile(filename);
+    if (!myfile.is_open()) {
+        std::cout << "Couldn't open " << filename << std::endl;
+        exit(1);
+    }
+    //   Open the input file
+    (getline(myfile, mtyp)); //Get the matrix type
+    myfile >> k; //Get the matrix dimensions
+
+    // Create the triplet vectors
+    if (mtyp == "Full matrix") {
+        double z;
+        for (int i = 0; i < k; i++) {
+            for (int j = 0; j < k; j++) {
+                myfile >> z;
+                if (z != 0) {
+                    std::vector<double> temp;
+                    temp.push_back(i);
+                    temp.push_back(j);
+                    temp.push_back(z);
+                    mtrp.push_back(temp);
+                }
+            }
+        }
+    }
+    else if (mtyp == "Sparse matrix") {
+        double z;  // Value in sparse matrix
+        int i, j; // Locations in sparse matrix
+        while (myfile >> i >> j >> z) {
+            std::vector<double> temp;
+            temp.push_back(i - 1);
+            temp.push_back(j - 1);
             temp.push_back(z);
             mtrp.push_back(temp);
         }
@@ -51,10 +97,56 @@ void Matrix::readFile(std::string filename)
 
 }
 
-std::vector<double> Matrix::calcRes(double mtim)
+void Sparse::readSparse(std::string filename)
+{
+    // Check to see if input file exists
+    std::ifstream myfile(filename);
+    if (!myfile.is_open()) {
+        std::cout << "Couldn't open " << filename << std::endl;
+        exit(1);
+    }
+    //   Open the input file
+    (getline(myfile, mtyp)); //Get the matrix type
+    myfile >> k; //Get the matrix dimensions
+
+    // Create the triplet vectors
+    if (mtyp == "Full matrix") {
+        double z;
+        for (int i = 0; i < k; i++) {
+            for (int j = 0; j < k; j++) {
+                myfile >> z;
+                if (z != 0) {
+                    std::vector<double> temp;
+                    temp.push_back(i);
+                    temp.push_back(j);
+                    temp.push_back(z);
+                    mtrp.push_back(temp);
+                }
+            }
+        }
+    }
+    else if (mtyp == "Sparse matrix") {
+        double z;  // Value in sparse matrix
+        int i, j; // Locations in sparse matrix
+        while (myfile >> i >> j >> z) {
+            std::vector<double> temp;
+            temp.push_back(i - 1);
+            temp.push_back(j - 1);
+            temp.push_back(z);
+            mtrp.push_back(temp);
+        }
+    }
+    else {
+        std::cout << "Invalid matrix specifier" << std::endl;
+        exit(1);
+    }
+    myfile.close();    //close the file object.     
+
+}
+
+void Matrix::calcRes(double mtim)
 // This is the calculation using the triplet vectors
 {
-    
     for (int i = 0; i < k; i++) {
         cres.push_back(0);
     }
@@ -62,10 +154,9 @@ std::vector<double> Matrix::calcRes(double mtim)
     for (int i = 0; i < mtrp.size(); i++) {
         cres[mtrp[i][0]] += mtrp[i][2] * mtim;
     }
-    return cres;
 }
 
-std::vector<double> Matrix::matRes(double mtim)
+void Matrix::matRes(double mtim)
 {
     // This is the calculation using a full matrix to check
     std::vector<std::vector<double>> mate;
@@ -87,7 +178,6 @@ std::vector<double> Matrix::matRes(double mtim)
         mult.push_back(mtim);
     }
 
-    
     for (int i = 0; i < k; i++)
     {
         mres.push_back(0);                        // Initialise
@@ -96,11 +186,10 @@ std::vector<double> Matrix::matRes(double mtim)
             mres[i] += mate[i][j] * mult[j];       // Sum of each element
         }
     }
-    return mres;
 }
 
-void Matrix::checkRes(std::vector<double> mres, std::vector<double> cres)
-    // Are the results the same?
+void Matrix::checkRes()
+// Are the results the same?
 {
     int err = 0;
     for (int i = 0; i < k; i++)
@@ -112,13 +201,14 @@ void Matrix::checkRes(std::vector<double> mres, std::vector<double> cres)
     }
     if (err == 0) {
         std::cout << "The calculation was correct!" << std::endl;
-        printRes(mres);
-    } else {
+        printRes();
+    }
+    else {
         std::cout << "There was an error!" << std::endl;
     }
 }
 
-void Matrix::printRes(std::vector<double> mres)
+void Matrix::printRes()
 {
     // Print the result?
     std::cout << "The result is" << std::endl;

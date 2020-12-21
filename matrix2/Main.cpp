@@ -13,19 +13,17 @@ int main()
 
     Matrix matrix;
 
-    matrix.readFile(filename);
+//    matrix.readFile(filename);
 
     std::cout << "Enter the matrix multiplier" << std::endl;
     double mtim;
     std::cin >> mtim;
 
-    std::vector<double> cres;
     matrix.calcRes(mtim);
 
-    std::vector<double> mres;
     matrix.matRes(mtim);
 
-    matrix.checkRes(mres, cres);
+    matrix.checkRes();
 
     return 0;
 }

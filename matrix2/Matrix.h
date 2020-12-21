@@ -16,7 +16,7 @@ public:
 	int readFile(std::string);
 	void calcRes(double mtim);
 	void matRes(double mtim);
-	void checkRes(int err);
+	int checkRes();
 	void printRes();
 };
 #endif /* Matrix_h */

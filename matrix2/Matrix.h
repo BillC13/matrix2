@@ -13,10 +13,10 @@ private:
 	int k;
 
 public:
-	void calcRes(double);
-	void matRes(double);
-	void readFile(std::string);
-	void checkRes();
+	int readFile(std::string, int err);
+	void calcRes(double mtim);
+	void matRes(double mtim);
+	void checkRes(int err);
 	void printRes();
 };
 #endif /* Matrix_h */

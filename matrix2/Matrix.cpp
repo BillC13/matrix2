@@ -4,14 +4,15 @@
 #include <fstream>
 #include <vector>
 
-void Matrix::readFile(std::string filename)
+int Matrix::readFile(std::string filename, int err)
 {
+    err = 0;
     // Check to see if input file exists
     std::ifstream myfile(filename);
     if (!myfile.is_open()) {
-        std::cout << "Couldn't open " << filename << std::endl;
-        exit(1);
-    }
+        err = 1;
+    } else
+    {
     //   Open the input file
     (getline(myfile, mtyp)); //Get the matrix type
     myfile >> k; //Get the matrix dimensions
@@ -44,10 +45,11 @@ void Matrix::readFile(std::string filename)
         }
     }
     else {
-        std::cout << "Invalid matrix specifier" << std::endl;
-        exit(1);
+        err =  2;
     }
-    myfile.close();    //close the file object.     
+    myfile.close();    //close the file object.  
+    }
+    return err;
 }
 
 void Matrix::calcRes(double mtim)
@@ -94,23 +96,15 @@ void Matrix::matRes(double mtim)
     }
 }
 
-void Matrix::checkRes()
-// Are the results the same?
+void Matrix::checkRes(int err)
+    // Are the results the same?
 {
-    int err = 0;
     for (int i = 0; i < k; i++)
     {
         if (mres[i] != cres[i]) {
             err = 1;
             break;
         }
-    }
-    if (err == 0) {
-        std::cout << "The calculation was correct!" << std::endl;
-        printRes();
-    }
-    else {
-        std::cout << "There was an error!" << std::endl;
     }
 }
 

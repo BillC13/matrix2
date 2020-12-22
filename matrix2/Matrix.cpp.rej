@@ -1,0 +1,9 @@
+diff a/matrix2/Matrix.cpp b/matrix2/Matrix.cpp	(rejected hunks)
+@@ -10,6 +10,7 @@
+      // Check to see if input file exists
+      std::ifstream myfile(filename);
+      if (!myfile.is_open()) {
+++<<<<<<< Updated upstream
+ +        std::cout << "Couldn't open " << filename << std::endl;
+ +        exit(1);
+ +    }

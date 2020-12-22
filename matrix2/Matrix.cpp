@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <string>
 
 int Matrix::readFile(std::string filename)
 {
@@ -15,6 +16,7 @@ int Matrix::readFile(std::string filename)
     else
     {
         //   Open the input file
+        std::string mtyp;
         (getline(myfile, mtyp)); //Get the matrix type
         myfile >> k; //Get the matrix dimensions
 
@@ -82,18 +84,12 @@ void Matrix::matRes(double mtim)
         mate[mtrp[i][0]][mtrp[i][1]] = mtrp[i][2];
     }
 
-    // create multiplication vector
-    std::vector<double> mult;
-    for (int i = 0; i < k; i++) {
-        mult.push_back(mtim);
-    }
-
     for (int i = 0; i < k; i++)
     {
         mres.push_back(0);                        // Initialise
         for (int j = 0; j < k; j++)
         {
-            mres[i] += mate[i][j] * mult[j];       // Sum of each element
+            mres[i] += mate[i][j] * mtim;       // Sum of each element
         }
     }
 }

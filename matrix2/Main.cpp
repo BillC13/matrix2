@@ -7,6 +7,8 @@
 
 int main()
 {
+    // this program takes a matrix, either sparse or full, and multiplies it by a vector
+    // It first performs this using triplet storage, and then checks this against a full matrix calculation
     std::string mtyp, filename;  // Matrix type
     std::cout << "Enter the matrix filename" << std::endl;
     getline(std::cin, filename);
@@ -18,23 +20,30 @@ int main()
         std::cout << "Couldn't open " << filename << std::endl;
         return 1;
     case(2):
-        std::cout << "Invalid matrix specifier " << std::endl;
+        std::cout << "Invalid matrix specifier" << std::endl;
         return 1;
     }
         std::cout << "Enter the matrix multiplier" << std::endl;
         double mtim;
+        
         std::cin >> mtim;
-
-        matrix.calcRes(mtim);
-
-        matrix.matRes(mtim);
-
-        if (matrix.checkRes() == 0) {
-            std::cout << "The calculation was correct!" << std::endl;
-            matrix.printRes();
+        while (!std::cin.good()) {
+            std::cout << "Invalid multiplier" << std::endl;
+            return 1;
         }
-        else {
-            std::cout << "There was an error!" << std::endl;
-          return 0;
+        {
+            matrix.calcRes(mtim);
+
+            matrix.matRes(mtim);
+
+            if (matrix.checkRes() == 0) {
+                std::cout << "The calculation was correct!" << std::endl;
+                matrix.printRes();
+            }
+            else {
+                std::cout << "There was an error!" << std::endl;
+                return 1;
+            }
+        }
+        return 0;
     }
-}

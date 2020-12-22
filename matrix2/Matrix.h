@@ -9,7 +9,6 @@ private:
 	std::vector<std::vector<double>> mtrp;
 	std::vector<double> mres;
 	std::vector<double> cres;
-	std::string mtyp;
 	int k;
 
 public:

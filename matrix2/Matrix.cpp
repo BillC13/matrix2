@@ -7,14 +7,9 @@
 
 int Matrix::readFile(std::string filename)
 {
-    int err = 0;
     // Check to see if input file exists
     std::ifstream myfile(filename);
-    if (!myfile.is_open()) {
-        return 1;
-    }
-    else
-    {
+    if (!myfile.is_open()) return 1;
         //   Open the input file
         std::string mtyp;
         (getline(myfile, mtyp)); //Get the matrix type
@@ -53,7 +48,6 @@ int Matrix::readFile(std::string filename)
             return 2;
         }
         myfile.close();    //close the file object. 
-    }
 }
 
 void Matrix::calcRes(double mtim)

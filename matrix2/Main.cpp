@@ -23,27 +23,26 @@ int main()
         std::cout << "Invalid matrix specifier" << std::endl;
         return 1;
     }
-        std::cout << "Enter the matrix multiplier" << std::endl;
-        double mtim;
-        
-        std::cin >> mtim;
-        while (!std::cin.good()) {
-            std::cout << "Invalid multiplier" << std::endl;
-            return 1;
-        }
-        {
-            matrix.calcRes(mtim);
-
-            matrix.matRes(mtim);
-
-            if (matrix.checkRes() == 0) {
-                std::cout << "The calculation was correct!" << std::endl;
-                matrix.printRes();
-            }
-            else {
-                std::cout << "There was an error!" << std::endl;
-                return 1;
-            }
-        }
-        return 0;
+   
+    std::cout << "Enter the matrix multiplier" << std::endl;
+    double mtim;
+    std::cin >> mtim;
+    if (!std::cin.good()) {
+        std::cout << "Invalid multiplier" << std::endl;
+        return 1;
     }
+     
+    matrix.calcRes(mtim);
+
+    matrix.matRes(mtim);
+
+     if (matrix.checkRes() == 0) {
+         std::cout << "The calculation was correct!" << std::endl;
+         matrix.printRes();
+     }
+     else {
+         std::cout << "There was an error!" << std::endl;
+         return 1;
+     }
+    return 0;
+}

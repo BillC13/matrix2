@@ -17,5 +17,6 @@ public:
 	void matRes(double mtim);
 	int checkRes();
 	void printRes();
+	void outRes(std::string);
 };
 #endif /* Matrix_h */

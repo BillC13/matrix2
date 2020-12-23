@@ -44,5 +44,6 @@ int main()
          std::cout << "There was an error!" << std::endl;
          return 1;
      }
+
     return 0;
 }

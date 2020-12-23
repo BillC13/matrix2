@@ -30,7 +30,7 @@ int Matrix::readFile(std::string filename)
                     }
                 }
             }
-            return 0;
+            myfile.close();    //close the file object. 
         }
         else if (mtyp == "Sparse matrix") {
             double z;  // Value in sparse matrix
@@ -42,12 +42,13 @@ int Matrix::readFile(std::string filename)
                 temp.push_back(z);
                 mtrp.push_back(temp);
             }
-            return 0;
+            myfile.close();    //close the file object. 
         }
         else {
+            myfile.close();    //close the file object. 
             return 2;
         }
-        myfile.close();    //close the file object. 
+        return 0;
 }
 
 void Matrix::calcRes(double mtim)
